@@ -1,0 +1,104 @@
+h1. Matrix Relations
+
+Provides a lightweight relationship fieldtype for use with "Pixel &amp; Tonic Matrix":http://pixelandtonic.com/matrix/ .
+
+h2. Info
+
+Developed by Moresoda Design Ltd, "http://www.moresoda.co.uk":http://www.moresoda.co.uk
+
+h2. Requirements
+
+* ExpressionEngine 2.3 +
+* P&T Matrix 2.2+
+
+h2. Browser Compatibility
+
+* Firefox 2+
+* Safari 2+
+* Chrome 3+
+* Opera 9+
+* Internet Explorer 7+
+
+h2. Installation
+
+# Copy the @system/expressionengine/third_party/matrix_relations@ folder to your @system/expressionengine/third_party/@ folder.
+# Go to _Add-ons&rarr;Fieldtypes_ in the ExpressionEngine control panel and install the fieldtype labelled _Matrix Relations_.
+# You will now see _Matrix_Relations_ as a fieldtype option when creating &amp; editing P&T Matrix fields
+
+
+h2. Example Usage
+
+h3. Simple Example
+
+If you have setup a Matrix field called 'people' and within the Matrix settings you have created a Matrix Relations field called 'name', your templates may look like this:
+
+<pre>
+	{exp:channel:entries channel="channel_name"}
+		<ul>
+		{people}
+			<li>{name}</li>
+		{/people}
+		</ul>
+	{/exp:channel:entries}
+</pre>
+
+By default the field returns the entry title:
+
+<pre>
+	<ul>
+		<li>John Smith</li>
+		<li>Richard Jones</li>
+		<li>Sarah Richards</li>
+	</ul>
+</pre>
+
+h3. Parameter Example
+
+You can access different information regarding the related entry by using the 'field' parameter:
+
+<pre>
+	{exp:channel:entries channel="channel_name"}
+		<ul>
+		{people}
+			<li>{name field="url_title"}</li>
+		{/people}
+		</ul>
+	{/exp:channel:entries}
+</pre>
+
+Produces:
+
+<pre>
+	<ul>
+		<li>john-smith</li>
+		<li>richard-jones</li>
+		<li>sarah-richards</li>
+	</ul>
+</pre>
+
+h2. Parameters
+
+h4. _field_
+
+Example:
+
+<pre>
+	{field_name field="entry_id"}
+</pre>
+
+Allows you to display different information about the related entry.  Accepts the following field names:
+
+* entry_id
+* title [default]
+* url_title
+* site_id
+* channel_id
+* author_id
+* status
+
+
+h2. Change log
+
+h4. 1.0
+
+Public release
