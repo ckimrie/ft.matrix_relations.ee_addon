@@ -78,7 +78,7 @@ Produces:
 
 h2. Parameters
 
-h4. _field_
+h3. _field_
 
 Example:
 
@@ -89,7 +89,7 @@ Example:
 Allows you to display different information about the related entry.  Accepts the following field names:
 
 * entry_id
-* title [default]
+* title  - _[default]_
 * url_title
 * site_id
 * channel_id
