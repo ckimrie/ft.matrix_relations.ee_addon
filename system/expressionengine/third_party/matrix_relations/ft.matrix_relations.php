@@ -20,7 +20,7 @@ class Matrix_relations_ft extends EE_Fieldtype {
 	// =========================================
 	function display_field($data)
 	{
-	
+		//Do nothing. Only matrix compatible.
 	}
 	
 	
@@ -48,7 +48,9 @@ class Matrix_relations_ft extends EE_Fieldtype {
 	
 	
 	
-	
+	// =========================
+	// = Matrix Field Settings =
+	// =========================
 	public function display_cell_settings($data = array())
 	{
 		$this->EE->load->helper('form');
@@ -94,24 +96,8 @@ class Matrix_relations_ft extends EE_Fieldtype {
 		
 	}
 	
-	
-
-	
-	
-	
-	// =============================================
-	// = Process the address and return an address =
-	// =============================================
-	
-	/*
-		TODO Add marker position and config options for map
-	*/
-	public function save($str)
-	{
-		
-	}
 }
-// END Google_maps_ft class
+// END Matrix_relations_ft class
 
-/* End of file ft.google_maps.php */
-/* Location: ./system/expressionengine/third_party/google_maps/ft.google_maps.php */
+/* End of file ft.matrix_relations.php */
+/* Location: ./system/expressionengine/third_party/matrix_relations/ft.matrix_relations.php */
