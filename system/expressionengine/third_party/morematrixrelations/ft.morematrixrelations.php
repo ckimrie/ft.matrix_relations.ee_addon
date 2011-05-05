@@ -99,5 +99,5 @@ class Morematrixrelations_ft extends EE_Fieldtype {
 }
 // END Matrix_relations_ft class
 
-/* End of file ft.matrix_relations.php */
-/* Location: ./system/expressionengine/third_party/matrix_relations/ft.matrix_relations.php */
+/* End of file ft.morematrixrelations.php */
+/* Location: ./system/expressionengine/third_party/morematrixrelations/ft.morematrixrelations.php */
