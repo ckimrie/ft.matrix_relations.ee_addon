@@ -1,10 +1,10 @@
-h1. Matrix Relations
+h1. moreMatrixRelations
 
 Provides a lightweight relationship fieldtype for use with "Pixel &amp; Tonic Matrix":http://pixelandtonic.com/matrix/ .
 
 h2. Info
 
-Developed by Moresoda Design Ltd, "http://www.moresoda.co.uk":http://www.moresoda.co.uk
+Developed by Moresoda Design Ltd, "http://moresoda.co.uk":http://moresoda.co.uk
 
 h2. Requirements
 
@@ -21,16 +21,16 @@ h2. Browser Compatibility
 
 h2. Installation
 
-# Copy the @system/expressionengine/third_party/matrix_relations@ folder to your @system/expressionengine/third_party/@ folder.
-# Go to _Add-ons&rarr;Fieldtypes_ in the ExpressionEngine control panel and install the fieldtype labelled _Matrix Relations_.
-# You will now see _Matrix_Relations_ as a fieldtype option when creating &amp; editing P&T Matrix fields
+# Copy the @system/expressionengine/third_party/morematrixrelations@ folder to your @system/expressionengine/third_party/@ folder.
+# Go to _Add-ons&rarr;Fieldtypes_ in the ExpressionEngine control panel and install the fieldtype labelled _moreMatrixRelations_.
+# You will now see _moreMatrixRelations_ as a fieldtype option when creating &amp; editing P&T Matrix fields
 
 
 h2. Example Usage
 
 h3. Simple Example
 
-If you have setup a Matrix field called 'people' and within the Matrix settings you have created a Matrix Relations field called 'name', your templates may look like this:
+If you have setup a Matrix field called 'people' and within the Matrix settings you have created a moreMatrixRelations field called 'name', your templates may look like this:
 
 <pre>
 	{exp:channel:entries channel="channel_name"}
@@ -99,6 +99,11 @@ Allows you to display different information about the related entry.  Accepts th
 
 h2. Change log
 
+h4. 1.1
+
+* Renamed the add-on moreMatrixRelations
+* Updated docs
+
 h4. 1.0
 
-Public release
+* Public release
