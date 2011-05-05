@@ -1,9 +1,9 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Matrix_relations_ft extends EE_Fieldtype {
+class Morematrixrelations_ft extends EE_Fieldtype {
 
 	var $info = array(
-		'name'		=> 'Matrix Relations',
+		'name'		=> 'moreMatrixRelations',
 		'version'	=> '1.0'
 	);
 	
