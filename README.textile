@@ -1,3 +1,6 @@
+!http://moresoda.co.uk/external_assets/github/moresoda-logo.png(moresoda)!:http://moresoda.co.uk
+
+
 h1. moreMatrixRelations
 
 Provides a lightweight relationship fieldtype for use with "Pixel &amp; Tonic Matrix":http://pixelandtonic.com/matrix/ .
