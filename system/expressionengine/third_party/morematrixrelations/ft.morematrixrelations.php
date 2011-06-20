@@ -64,7 +64,7 @@ class Morematrixrelations_ft extends EE_Fieldtype {
 		foreach($q->result() as $qr){
 			$channels[$qr->channel_id] = $qr->channel_title;
 		}
-		
+			
 		return array(
 			array("Channel", form_dropdown('channel', $channels, $data['channel']))
 		);
@@ -81,9 +81,17 @@ class Morematrixrelations_ft extends EE_Fieldtype {
 		$this->EE->db->where('entry_id', $data);
 		$this->EE->db->where('status !=', 'closed');
 		$q = $this->EE->db->get('channel_titles');
+	
 		
 		if($q->num_rows() > 0){
 			$qa = $q->row();
+			
+			//Add the pages URI
+			if(isset($this->EE->config->config['site_pages'][$this->EE->config->item('site_id')]['uris'][$data])){
+				$qa->page_uri = $this->EE->config->config['site_pages'][$this->EE->config->item('site_id')]['uris'][$data];
+			}
+			
+			
 			if(isset($params['field'])){
 				return isset($qa->$params['field']) ? $qa->$params['field'] : NULL;
 			}else{
