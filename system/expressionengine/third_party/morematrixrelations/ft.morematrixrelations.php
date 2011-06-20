@@ -4,7 +4,7 @@ class Morematrixrelations_ft extends EE_Fieldtype {
 
 	var $info = array(
 		'name'		=> 'moreMatrixRelations',
-		'version'	=> '1.0'
+		'version'	=> '1.2'
 	);
 	
 	
