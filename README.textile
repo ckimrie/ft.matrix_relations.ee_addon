@@ -98,9 +98,14 @@ Allows you to display different information about the related entry.  Accepts th
 * channel_id
 * author_id
 * status
+* page_uri
 
 
 h2. Change log
+
+h4. 1.2
+
+* Added page_uri to list of fields available in templates
 
 h4. 1.1
 
