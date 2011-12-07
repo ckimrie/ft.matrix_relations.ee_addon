@@ -41,7 +41,7 @@ class Morematrixrelations_ft extends EE_Fieldtype {
 		$this->EE->db->join("channels", "channel_titles.channel_id = channels.channel_id");
 		$q = $this->EE->db->get();
 		
-		$entries = array();
+		$entries = array( NULL => '--');
 		foreach($q->result() as $qr){
 			$entries[$qr->channel_title][$qr->entry_id] = $qr->status == "closed" ? $qr->title  . " [closed]" : $qr->title;
 		}
@@ -88,6 +88,20 @@ class Morematrixrelations_ft extends EE_Fieldtype {
 
 
 
+	
+
+	// ====================
+	// = Field validation =
+	// ====================
+	public function validate_cell( $data )
+	{
+	  if ($this->settings['col_required'] == 'y') {
+		if (! $data) {
+		  return lang('col_required');
+		}
+	  }
+	  return TRUE;
+	}
 	
 
 	// ===========================
