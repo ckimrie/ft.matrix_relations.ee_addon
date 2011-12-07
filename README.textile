@@ -103,7 +103,7 @@ Allows you to display different information about the related entry.  Accepts th
 
 h2. Change log
 
-h4. 1.2
+h4. 1.3
 
 * Ability to select entries from multiple channels.  Entries are listed organised by channel when using the fieldtype in a Matrix field.
 
