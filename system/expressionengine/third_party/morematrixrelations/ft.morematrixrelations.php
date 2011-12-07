@@ -4,7 +4,7 @@ class Morematrixrelations_ft extends EE_Fieldtype {
 
 	var $info = array(
 		'name'		=> 'moreMatrixRelations',
-		'version'	=> '1.2'
+		'version'	=> '1.3'
 	);
 	
 	
@@ -32,14 +32,18 @@ class Morematrixrelations_ft extends EE_Fieldtype {
 	public function display_cell($data)
 	{
 		$this->EE->load->helper('form');
-		
-		$this->EE->db->where('channel_id', $this->settings['channel']);
-		$this->EE->db->select('entry_id, title, status');
-		$q = $this->EE->db->get('channel_titles');
+
+		$this->EE->db->select('channel_titles.entry_id, channel_titles.title, channel_titles.status, channels.channel_title');		
+		$this->EE->db->where_in('channel_titles.channel_id', $this->settings['channel']);
+		$this->EE->db->order_by("channels.channel_title", "asc");
+		$this->EE->db->order_by("channel_titles.entry_date", "desc");
+		$this->EE->db->from("channel_titles");
+		$this->EE->db->join("channels", "channel_titles.channel_id = channels.channel_id");
+		$q = $this->EE->db->get();
 		
 		$entries = array();
 		foreach($q->result() as $qr){
-			$entries[$qr->entry_id] = $qr->status == "closed" ? $qr->title  . " [closed]" : $qr->title;
+			$entries[$qr->channel_title][$qr->entry_id] = $qr->status == "closed" ? $qr->title  . " [closed]" : $qr->title;
 		}
 		
 		return form_dropdown($this->cell_name, $entries, $data);
@@ -64,11 +68,26 @@ class Morematrixrelations_ft extends EE_Fieldtype {
 		foreach($q->result() as $qr){
 			$channels[$qr->channel_id] = $qr->channel_title;
 		}
+
+		if(!is_array($data['channel'])){
+			$data['channel'] = array($data['channel']);
+		}
+
+
+		$out = "";
+
+		foreach($channels as $channel_id => $channel_title){
+			$out  .= "<label>".form_checkbox("channel[]", $channel_id, in_array($channel_id, $data['channel']))." ".$channel_title."</label><br/>";
+		}
+
 			
 		return array(
-			array("Channel", form_dropdown('channel', $channels, $data['channel']))
+			array("Channel", $out)
 		);
 	}
+
+
+
 	
 
 	// ===========================

@@ -105,6 +105,10 @@ h2. Change log
 
 h4. 1.2
 
+* Ability to select entries from multiple channels.  Entries are listed organised by channel when using the fieldtype in a Matrix field.
+
+h4. 1.2
+
 * Added page_uri to list of fields available in templates
 
 h4. 1.1
