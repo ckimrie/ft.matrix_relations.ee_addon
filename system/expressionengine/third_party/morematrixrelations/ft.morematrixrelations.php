@@ -4,7 +4,7 @@ class Morematrixrelations_ft extends EE_Fieldtype {
 
 	var $info = array(
 		'name'		=> 'moreMatrixRelations',
-		'version'	=> '1.5'
+		'version'	=> '1.5.1'
 	);
 	
 	
@@ -169,13 +169,13 @@ class Morematrixrelations_ft extends EE_Fieldtype {
 		$vars = $q->result_array();
 
 
-		foreach($vars as $row){
+		foreach($vars as $key => $row){
 			
 			//Add the pages URI
-			$row['page_uri'] = "";
+			$vars[$key]['page_uri'] = "";
 			foreach($data as $entry_id){
-				if(isset($this->EE->config->config['site_pages'][$this->EE->config->item('site_id')]['uris'][$entry_id])){
-					$row['page_uri'] = $this->EE->config->config['site_pages'][$this->EE->config->item('site_id')]['uris'][$entry_id];
+				if(isset($this->EE->config->config['site_pages'][$this->EE->config->item('site_id')]['uris'][$entry_id]) && $entry_id == $row['entry_id']){
+					$vars[$key]['page_uri'] = $this->EE->config->config['site_pages'][$this->EE->config->item('site_id')]['uris'][$entry_id];
 				}
 			}
 		

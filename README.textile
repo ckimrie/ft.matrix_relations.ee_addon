@@ -168,6 +168,10 @@ If the status parameter is not specified it will filter out 'closed' entries by 
 
 h2. Change log
 
+h4. 1.5.1
+
+* Fixed bug where page_uri tag was not working
+
 h4. 1.5
 
 * Ordering and sort parameters added to template tags
