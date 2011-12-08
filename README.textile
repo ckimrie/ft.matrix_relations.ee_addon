@@ -33,19 +33,21 @@ h2. Example Usage
 
 h3. Simple Example
 
-If you have setup a Matrix field called 'people' and within the Matrix settings you have created a moreMatrixRelations field called 'name', your templates may look like this:
+If you have setup a Matrix field called 'people' and within the Matrix settings you have created a moreMatrixRelations field called 'name', your templates may look like this.  The fieldtype:
 
 <pre>
 	{exp:channel:entries channel="channel_name"}
-		<ul>
 		{people}
-			<li>{name}</li>
+			<ul>
+				{name}
+					<li>{title}</li>
+				{/name}
+			</ul>
 		{/people}
-		</ul>
 	{/exp:channel:entries}
 </pre>
 
-By default the field returns the entry title:
+The output could be something like the following:
 
 <pre>
 	<ul>
@@ -53,43 +55,17 @@ By default the field returns the entry title:
 		<li>Richard Jones</li>
 		<li>Sarah Richards</li>
 	</ul>
-</pre>
-
-h3. Parameter Example
-
-You can access different information regarding the related entry by using the 'field' parameter:
-
-<pre>
-	{exp:channel:entries channel="channel_name"}
-		<ul>
-		{people}
-			<li>{name field="url_title"}</li>
-		{/people}
-		</ul>
-	{/exp:channel:entries}
-</pre>
-
-Produces:
-
-<pre>
 	<ul>
-		<li>john-smith</li>
-		<li>richard-jones</li>
-		<li>sarah-richards</li>
+		<li>James Parker</li>
+		<li>Sarah Richards</li>
 	</ul>
 </pre>
 
-h2. Parameters
 
-h3. _field_
 
-Example:
+h2. Variables
 
-<pre>
-	{field_name field="entry_id"}
-</pre>
-
-Allows you to display different information about the related entry.  Accepts the following field names:
+The field type must always be used as a tag pair.  The following top level channel entry variables are available inside the moreMatrixRelations tag pair:
 
 * entry_id
 * title  - _[default]_
@@ -100,8 +76,16 @@ Allows you to display different information about the related entry.  Accepts th
 * status
 * page_uri
 
+Channel custom fields are not available.
+
 
 h2. Change log
+
+h4. 1.4
+
+* Ability to select multiple entries from within the matrix field.
+* Configuration option to restrict selection to a single entry or allow the multi select.
+* Template tag updated to use tag pairs only.
 
 h4. 1.3
 

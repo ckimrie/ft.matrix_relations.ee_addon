@@ -4,7 +4,7 @@ class Morematrixrelations_ft extends EE_Fieldtype {
 
 	var $info = array(
 		'name'		=> 'moreMatrixRelations',
-		'version'	=> '1.3'
+		'version'	=> '1.4'
 	);
 	
 	
@@ -156,10 +156,8 @@ class Morematrixrelations_ft extends EE_Fieldtype {
 		$vars = $q->result_array();
 
 
-
 		foreach($vars as $row){
 			
-
 			//Add the pages URI
 			$row['page_uri'] = "";
 			foreach($data as $entry_id){
@@ -167,21 +165,11 @@ class Morematrixrelations_ft extends EE_Fieldtype {
 					$row['page_uri'] = $this->EE->config->config['site_pages'][$this->EE->config->item('site_id')]['uris'][$entry_id];
 				}
 			}
-			
-			
-			
-			//if(isset($params['field'])){
-			//	return isset($qa->$params['field']) ? $qa->$params['field'] : NULL;
-			//}else{
-			//	return $qa->title;
-			//}
-		
 		
 		}
 
 
 		return $this->EE->TMPL->parse_variables($tagdata, $vars);
-
 	}
 
 	
