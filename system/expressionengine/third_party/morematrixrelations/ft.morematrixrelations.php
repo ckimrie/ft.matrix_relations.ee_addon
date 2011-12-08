@@ -38,6 +38,10 @@ class Morematrixrelations_ft extends EE_Fieldtype {
 
 		$data = explode("|", $data);
 
+		if($multiselect == "n"){
+			$data = $data[0];
+		}
+
 
 		$this->EE->load->helper('form');
 
@@ -141,8 +145,7 @@ class Morematrixrelations_ft extends EE_Fieldtype {
 		$this->EE->db->where_in('entry_id', $data);
 		$this->EE->db->where('status !=', 'closed');
 
-		//Ordering
-		if()
+
 
 		$q = $this->EE->db->get('channel_titles');
 	
