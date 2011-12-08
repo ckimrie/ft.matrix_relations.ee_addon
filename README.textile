@@ -61,6 +61,23 @@ The output could be something like the following:
 	</ul>
 </pre>
 
+h4. Parameter Example
+
+You can control the sort order using the 'orderby', 'sort' parameters and filter by entry status by using the 'status' parameter:
+
+<pre>
+	{exp:channel:entries channel="channel_name"}
+		{people}
+			<ul>
+				{name orderby="entry_date" sort="desc" status="open"}
+					<li>{title}</li>
+				{/name}
+			</ul>
+		{/people}
+	{/exp:channel:entries}
+</pre>
+
+The status parameter can also accept custom channel status names.
 
 
 h2. Variables
@@ -68,7 +85,7 @@ h2. Variables
 The field type must always be used as a tag pair.  The following top level channel entry variables are available inside the moreMatrixRelations tag pair:
 
 * entry_id
-* title  - _[default]_
+* title
 * url_title
 * site_id
 * channel_id
@@ -78,8 +95,83 @@ The field type must always be used as a tag pair.  The following top level chann
 
 Channel custom fields are not available.
 
+h2. Parameters
+
+h3. orderby
+
+Example:
+
+<pre>
+	{exp:channel:entries channel="channel_name"}
+		{people}
+			<ul>
+				{name orderby="entry_date"}
+					<li>{title}</li>
+				{/name}
+			</ul>
+		{/people}
+	{/exp:channel:entries}
+</pre>
+
+This parameter will allow you to customise the display order of the selected entries.  The default sort order will be ascending. Valid field names are the same as the variables made available in the template tags:
+
+* entry_id
+* title
+* url_title
+* site_id
+* channel_id
+* author_id
+* status
+* page_uri
+
+h3. sort
+
+Example:
+
+<pre>
+	{exp:channel:entries channel="channel_name"}
+		{people}
+			<ul>
+				{name orderby="entry_date" sort="asc"}
+					<li>{title}</li>
+				{/name}
+			</ul>
+		{/people}
+	{/exp:channel:entries}
+</pre>
+
+This parameter can only be used in conjunction with the 'orderby' parameter.  Valid sort options are:
+
+* asc
+* desc
+* random
+
+h3. status
+
+Example:
+
+<pre>
+	{exp:channel:entries channel="channel_name"}
+		{people}
+			<ul>
+				{name status="closed"}
+					<li>{title}</li>
+				{/name}
+			</ul>
+		{/people}
+	{/exp:channel:entries}
+</pre>
+
+Allows filtering of the selected entries by status.  Default status fields are 'open' / 'closed' but custom status fields can also be used.
+
+If the status parameter is not specified it will filter out 'closed' entries by default. 
 
 h2. Change log
+
+h4. 1.5
+
+* Ordering and sort parameters added to template tags
+* Status filter parameter added to template tags
 
 h4. 1.4
 

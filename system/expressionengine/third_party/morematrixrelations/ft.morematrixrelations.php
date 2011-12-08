@@ -4,7 +4,7 @@ class Morematrixrelations_ft extends EE_Fieldtype {
 
 	var $info = array(
 		'name'		=> 'moreMatrixRelations',
-		'version'	=> '1.4'
+		'version'	=> '1.5'
 	);
 	
 	
@@ -141,15 +141,28 @@ class Morematrixrelations_ft extends EE_Fieldtype {
 		$data = explode("|", $data);
 
 
-		
-		$this->EE->db->where_in('entry_id', $data);
-		$this->EE->db->where('status !=', 'closed');
 
+		//Entry ID
+		$this->EE->db->where_in('entry_id', $data);
+
+		//Status
+		if (isset($params['status'])) {
+			$this->EE->db->where('status', $params['status']);
+		}else{
+			$this->EE->db->where('status !=', 'closed');
+		}
+		
+
+		//Order
+		if (isset($params['orderby'])) {
+			$sort = isset($params['sort']) ? $params['sort'] : "asc";
+			$this->EE->db->order_by($params['orderby'], $params['sort']);
+		}
 
 
 		$q = $this->EE->db->get('channel_titles');
 	
-		
+		//No results, return nothing
 		if($q->num_rows() == 0) return;
 
 
