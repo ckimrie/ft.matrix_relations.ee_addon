@@ -31,6 +31,14 @@ class Morematrixrelations_ft extends EE_Fieldtype {
 	// =========================================
 	public function display_cell($data)
 	{
+		$multiselect = "n";
+		if(isset($this->settings['multiselect'])){
+			$multiselect = $this->settings['multiselect'];
+		}
+
+		$data = explode("|", $data);
+
+
 		$this->EE->load->helper('form');
 
 		$this->EE->db->select('channel_titles.entry_id, channel_titles.title, channel_titles.status, channels.channel_title');		
@@ -46,9 +54,21 @@ class Morematrixrelations_ft extends EE_Fieldtype {
 			$entries[$qr->channel_title][$qr->entry_id] = $qr->status == "closed" ? $qr->title  . " [closed]" : $qr->title;
 		}
 		
-		return form_dropdown($this->cell_name, $entries, $data);
+		if($multiselect == "y"){
+			return form_multiselect($this->cell_name."[]", $entries, $data, "size='7' style='width:100%'");
+		}else{
+			return form_dropdown($this->cell_name."[]", $entries, $data);
+		}
 	}
 
+
+
+
+	function save_cell( $data ){
+
+		return implode("|", $data);
+
+	}
 	
 	
 	
@@ -73,6 +93,10 @@ class Morematrixrelations_ft extends EE_Fieldtype {
 			$data['channel'] = array($data['channel']);
 		}
 
+		if(!isset($data['multiselect'])){
+			$data['multiselect'] = "n";
+		}
+
 
 		$out = "";
 
@@ -82,6 +106,7 @@ class Morematrixrelations_ft extends EE_Fieldtype {
 
 			
 		return array(
+			array("Multiple Select", form_dropdown("multiselect", array("n" => "No", "y" => "Yes"), $data['multiselect'])),
 			array("Channel", $out)
 		);
 	}
@@ -109,33 +134,53 @@ class Morematrixrelations_ft extends EE_Fieldtype {
 	// ===========================
 	function replace_tag($data, $params = array(), $tagdata = FALSE)
 	{
+		$data = explode("|", $data);
+
+
 		
-		
-		$this->EE->db->where('entry_id', $data);
+		$this->EE->db->where_in('entry_id', $data);
 		$this->EE->db->where('status !=', 'closed');
+
+		//Ordering
+		if()
+
 		$q = $this->EE->db->get('channel_titles');
 	
 		
-		if($q->num_rows() > 0){
-			$qa = $q->row();
+		if($q->num_rows() == 0) return;
+
+
+		$vars = $q->result_array();
+
+
+
+		foreach($vars as $row){
 			
+
 			//Add the pages URI
-			if(isset($this->EE->config->config['site_pages'][$this->EE->config->item('site_id')]['uris'][$data])){
-				$qa->page_uri = $this->EE->config->config['site_pages'][$this->EE->config->item('site_id')]['uris'][$data];
+			$row['page_uri'] = "";
+			foreach($data as $entry_id){
+				if(isset($this->EE->config->config['site_pages'][$this->EE->config->item('site_id')]['uris'][$entry_id])){
+					$row['page_uri'] = $this->EE->config->config['site_pages'][$this->EE->config->item('site_id')]['uris'][$entry_id];
+				}
 			}
 			
 			
-			if(isset($params['field'])){
-				return isset($qa->$params['field']) ? $qa->$params['field'] : NULL;
-			}else{
-				return $qa->title;
-			}
 			
-		}else{
-			return;
-		}
+			//if(isset($params['field'])){
+			//	return isset($qa->$params['field']) ? $qa->$params['field'] : NULL;
+			//}else{
+			//	return $qa->title;
+			//}
 		
+		
+		}
+
+
+		return $this->EE->TMPL->parse_variables($tagdata, $vars);
+
 	}
+
 	
 }
 // END Matrix_relations_ft class
