@@ -4,7 +4,7 @@ class Morematrixrelations_ft extends EE_Fieldtype {
 
 	var $info = array(
 		'name'		=> 'moreMatrixRelations',
-		'version'	=> '1.5.1'
+		'version'	=> '1.5.2'
 	);
 	
 	
@@ -35,8 +35,11 @@ class Morematrixrelations_ft extends EE_Fieldtype {
 		if(isset($this->settings['multiselect'])){
 			$multiselect = $this->settings['multiselect'];
 		}
-
-		$data = explode("|", $data);
+        
+        if(!is_array($data)){
+            $data = explode("|", $data);
+        }
+		
 
 		if($multiselect == "n"){
 			$data = $data[0];
