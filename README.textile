@@ -79,6 +79,21 @@ You can control the sort order using the 'orderby', 'sort' parameters and filter
 
 The status parameter can also accept custom channel status names.
 
+Use the 'prefix' parameter to prefix all variable names, which helps prevent collisions with variables from the {exp:channel:entries} tag:
+
+<pre>
+	{exp:channel:entries channel="channel_name"}
+		<h1>{title}</h1>
+		{people}
+			<ul>
+				{name prefix="name"}
+					<li>{name:title}</li>
+				{/name}
+			</ul>
+		{/people}
+	{/exp:channel:entries}
+</pre>
+
 
 h2. Variables
 
@@ -164,7 +179,7 @@ Example:
 
 Allows filtering of the selected entries by status.  Default status fields are 'open' / 'closed' but custom status fields can also be used.
 
-If the status parameter is not specified it will filter out 'closed' entries by default. 
+If the status parameter is not specified it will filter out 'closed' entries by default.
 
 h2. Change log
 
